@@ -7,3 +7,8 @@ how 2 use
 - uc. edit config with username, password, default comment, and how often u want to post (interval)
 - dort. python poster.py
 - bes. profit
+
+to - doodles
+
+- make not working parts work
+- make c0de prettier
