@@ -1,4 +1,4 @@
-import os, random, json, requests, threading
+import os, random, json, requests, sched
 from InstagramAPI import InstagramAPI
 from time import sleep, time
 from requests_toolbelt import MultipartEncoder
@@ -67,7 +67,6 @@ def loginInsta(username, password):
     return insta_api
 
 def postPhoto(interval, caption, insta_api):
-    threading.Timer(interval, postPhoto).start()
     randPhoto = random.choice(os.listdir("photos"))
     randPhoto = "photos/" + randPhoto
     post = insta_api.uploadPhoto(randPhoto, caption=caption)
@@ -85,8 +84,10 @@ def main():
     interval = getInterval()
     caption = getCaption()
 
+    s = sched.scheduler(time, sleep)
     insta_api = loginInsta(username, password)
-    postPhoto(interval, caption, insta_api)
+    s.enter(60, 1, postPhoto(interval, caption, insta_api), (s,))  # (delay, priority, action, argument)
+    s.run()
 
 if __name__ == "__main__":
     main()
