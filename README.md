@@ -12,3 +12,8 @@ to - doodles
 
 - make not working parts work
 - make c0de prettier
+
+known issues
+
+- threading doesn't work (what the whole program is for)
+- sometimes the image won't post and program will stop
